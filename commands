@@ -1,0 +1,5 @@
+node -v: This command is used to check the version of Node.js installed on your system.
+
+npm -v: This command is used to check the version of npm (Node Package Manager) installed on your system.
+
+npx create-react-app applicationName: This command is used to create a new React application named "applicationName" using Create React App.
