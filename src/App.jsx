@@ -1,26 +1,32 @@
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
+import { Suspense, lazy, } from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import PrivacyPolicy from "./pages/PrivacyPolicy"
 import Term from "./pages/Term"
 import NotFound from "./pages/NotFound";
+import Loading from "./components/Loading";
 
+
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"))
 
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route >
-            <Route index element={<Home />} />
-            <Route path="home" element={<Home />} />
-            <Route path="home/:user/:customer" element={<Home />} />
-            <Route path="privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="term" element={<Term />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route >
+              <Route index element={<Home />} />
+              <Route path="home" element={<Home />} />
+              <Route path="home/:user/:customer" element={<Home />} />
+              <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="term" element={<Term />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
 
-        </Routes>
+          </Routes>
+        </Suspense>
+
 
       </BrowserRouter>
     </div>
