@@ -4,8 +4,11 @@ import FormInput from '../components/FormInput'
 import { Formik } from 'formik'
 
 import { object, string, number, date, InferType } from 'yup';
+import Header from '../layouts/Header';
 
-export default function Home() {
+export default function Home({
+    isAuthenticated, setIsAuthenticated
+}) {
 
     const navigate = useNavigate()
     const params = useParams()
@@ -66,6 +69,7 @@ export default function Home() {
     // }
     return (
         <div>
+            <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
             <Link to='/home'>Home</Link>
             <Link to='/privacy-policy'>Privacy policy</Link>
             <Link to='/term'>Term</Link>
@@ -119,8 +123,6 @@ export default function Home() {
                     }}>Submit</button>
                 </>)}
             </Formik>
-
-
         </div>
     )
 }
