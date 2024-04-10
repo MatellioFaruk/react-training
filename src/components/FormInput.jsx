@@ -4,12 +4,18 @@ export default function FormInput({
     label,
     name,
     handleChange,
-    type
+    type,
+    value,
+    error
 }) {
     return (
         <><label>
             {label}
         </label>
-            <input name={name} type={type} onChange={handleChange} /></>
+            <input name={name} type={type} value={value} onChange={handleChange} />
+            <small>
+                {error}
+            </small>
+        </>
     )
 }

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import FormInput from '../components/FormInput'
+import { Formik } from 'formik'
+
+import { object, string, number, date, InferType } from 'yup';
 
 export default function Home() {
 
@@ -8,10 +11,7 @@ export default function Home() {
     const params = useParams()
 
     const [user, setUser] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: ""
+
     })
 
     // const [firstName, setFirstName] = useState("")
@@ -57,12 +57,13 @@ export default function Home() {
 
 
 
-    const handleChange = (event) => {
+
+    // const handleChange = (event) => {
 
 
-        setUser(prevState => { return { ...prevState, [event.target.name]: event.target.value } })
+    //     setUser(prevState => { return { ...prevState, [event.target.name]: event.target.value } })
 
-    }
+    // }
     return (
         <div>
             <Link to='/home'>Home</Link>
@@ -77,17 +78,58 @@ export default function Home() {
             <button onClick={handleTerms}>Terms</button>
             <br />
 
-            <FormInput label={"First name"} name="firstName" type="text" handleChange={handleChange} />
-            <br />
-            <FormInput label={"Last name"} name="lastName" type="text" handleChange={handleChange} />
-            <br />
-            <FormInput label={"Email"} name="email" type="text" handleChange={handleChange} />
-            <br />
-            <FormInput label={"Password"} name="password" type="password" handleChange={handleChange} />
-            <button onClick={() => {
-                handleSubmit()
-                add([{ 1: "hello" }, { 2: "hello" }])
-            }}>Submit</button>
+            <Formik
+                initialValues={{
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    password: ""
+                }}
+                validationSchema={
+                    object({
+                        firstName: string().required(),
+                        lastName: string().required(),
+                        email: string().required().email(),
+                        password: string().required().min(1).max(10),
+                    })
+
+
+                }
+                onSubmit={(values, actions) => {
+                    console.log(values, actions)
+
+                    hello().then(res => {
+
+                        actions.resetForm()
+                    }).catch(err => {
+
+                    })
+
+
+                }}
+            >
+                {({
+                    handleChange,
+                    values,
+                    errors,
+                    handleSubmit
+                }) => (<>
+                    {JSON.stringify(values)}<br />
+                    {JSON.stringify(errors)}<br />
+                    <FormInput label={"First name"} name="firstName" type="text" value={values.firstName} error={errors.firstName} handleChange={handleChange} />
+                    <br />
+                    <FormInput label={"Last name"} name="lastName" type="text" value={values.lastName} error={errors.lastName} handleChange={handleChange} />
+                    <br />
+                    <FormInput label={"Email"} name="email" type="text" value={values.email} error={errors.email} handleChange={handleChange} />
+                    <br />
+                    <FormInput label={"Password"} name="password" type="password" value={values.password} error={errors.password} handleChange={handleChange} />
+                    <button onClick={() => {
+                        handleSubmit()
+                    }}>Submit</button>
+                </>)}
+            </Formik>
+
+
         </div>
     )
 }
