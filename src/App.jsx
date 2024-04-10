@@ -4,8 +4,6 @@ import Home from "./pages/Home";
 import Term from "./pages/Term"
 import NotFound from "./pages/NotFound";
 import Loading from "./components/Loading";
-
-
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"))
 
 
@@ -17,10 +15,8 @@ function App() {
           <Routes>
             <Route >
               <Route index element={<Home />} />
-              <Route path="home" element={<Home />} />
-              <Route path="home/:user/:customer" element={<Home />} />
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="term" element={<Term />} />
+              <Route path="terms-condition" element={<Term />} />
               <Route path="*" element={<NotFound />} />
             </Route>
 

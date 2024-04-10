@@ -97,15 +97,6 @@ export default function Home() {
                 }
                 onSubmit={(values, actions) => {
                     console.log(values, actions)
-
-                    hello().then(res => {
-
-                        actions.resetForm()
-                    }).catch(err => {
-
-                    })
-
-
                 }}
             >
                 {({
