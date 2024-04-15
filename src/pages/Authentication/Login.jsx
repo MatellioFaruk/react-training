@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthenticationContext } from '../../context/authentication.context'
 
-export default function Login({ isAuthenticated, setIsAuthenticated }) {
-    const navigate = useNavigate()
+export default function Login() {
+    const { login } = useContext(AuthenticationContext)
     return (
         <div>Login
             <button onClick={() => {
-                setIsAuthenticated(true)
-                navigate("/")
+                login()
+
             }}>
                 Login
             </button>

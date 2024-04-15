@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import FormInput from '../components/FormInput'
 import { Formik } from 'formik'
 
 import { object, string, number, date, InferType } from 'yup';
 import Header from '../layouts/Header';
+import { AuthenticationContext } from '../context/authentication.context';
+import { UserContext } from '../context/user.context';
 
-export default function Home({
-    isAuthenticated, setIsAuthenticated
-}) {
+export default function Home() {
 
     const navigate = useNavigate()
     const params = useParams()
@@ -16,6 +16,10 @@ export default function Home({
     const [user, setUser] = useState({
 
     })
+
+    const { isAuthenticated, setIsAuthenticated, logout } = useContext(AuthenticationContext)
+
+    const { contextUser } = useContext(UserContext)
 
     // const [firstName, setFirstName] = useState("")
     // const [lastName, setLastName] = useState("")
@@ -109,6 +113,8 @@ export default function Home({
                     errors,
                     handleSubmit
                 }) => (<>
+
+                    {JSON.stringify(contextUser)}
                     {JSON.stringify(values)}<br />
                     {JSON.stringify(errors)}<br />
                     <FormInput label={"First name"} name="firstName" type="text" value={values.firstName} error={errors.firstName} handleChange={handleChange} />
