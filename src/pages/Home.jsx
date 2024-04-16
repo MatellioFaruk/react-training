@@ -7,11 +7,15 @@ import { object, string, number, date, InferType } from 'yup';
 import Header from '../layouts/Header';
 import { AuthenticationContext } from '../context/authentication.context';
 import { UserContext } from '../context/user.context';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 export default function Home() {
 
     const navigate = useNavigate()
     const params = useParams()
+    const counter = useSelector(state => state.counter.counter)
+    const dispatch = useDispatch()
 
     const [user, setUser] = useState({
 
@@ -129,6 +133,22 @@ export default function Home() {
                     }}>Submit</button>
                 </>)}
             </Formik>
-        </div>
+
+
+            <button onClick={() => {
+                dispatch({
+                    type: "DEC"
+                })
+            }}>
+                -
+            </button>
+            {counter}
+            <button onClick={() => {
+                dispatch({
+                    type: "INC"
+                })
+            }}>+</button>
+
+        </div >
     )
 }

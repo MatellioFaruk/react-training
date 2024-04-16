@@ -5,6 +5,8 @@ import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import AuthenticationProvider from "./context/authentication.context";
 import UserProvider from "./context/user.context";
+import { Provider } from "react-redux";
+import { store } from "./redux/redux";
 
 const Home = lazy(() => import("./pages/Home"))
 const Term = lazy(() => import("./pages/Term"))
@@ -21,44 +23,43 @@ function App() {
     <div className="App">
 
       <BrowserRouter>
-        <AuthenticationProvider>
-          <UserProvider>
+        <Provider store={store} >
+          <AuthenticationProvider>
+            <UserProvider>
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  <Route >
+                    <Route index element={<PrivateRoute>
+                      <Home />
+                    </PrivateRoute>} />
+                    <Route path="login" element={
+                      <PublicRoute>
+                        <Login />
+                      </PublicRoute>
+                    } />
+                    <Route path="register" element={
+                      <PublicRoute>
+                        <Register />
+                      </PublicRoute>
+                    } />
+                    <Route path="privacy-policy" element={
 
+                      <PrivacyPolicy />
 
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route >
-                  <Route index element={<PrivateRoute>
-                    <Home />
-                  </PrivateRoute>} />
-                  <Route path="login" element={
-                    <PublicRoute>
-                      <Login />
-                    </PublicRoute>
-                  } />
-                  <Route path="register" element={
-                    <PublicRoute>
-                      <Register />
-                    </PublicRoute>
-                  } />
-                  <Route path="privacy-policy" element={
+                    } />
+                    <Route path="terms-condition" element={
 
-                    <PrivacyPolicy />
+                      <Term />
 
-                  } />
-                  <Route path="terms-condition" element={
+                    } />
+                    <Route path="*" element={<NotFound />} />
+                  </Route>
 
-                    <Term />
-
-                  } />
-                  <Route path="*" element={<NotFound />} />
-                </Route>
-
-              </Routes>
-            </Suspense>
-          </UserProvider>
-        </AuthenticationProvider>
-
+                </Routes>
+              </Suspense>
+            </UserProvider>
+          </AuthenticationProvider>
+        </Provider>
       </BrowserRouter>
 
     </div>
