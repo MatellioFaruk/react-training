@@ -8,6 +8,7 @@ import Header from '../layouts/Header';
 import { AuthenticationContext } from '../context/authentication.context';
 import { UserContext } from '../context/user.context';
 import { useDispatch, useSelector } from 'react-redux';
+import { counterIncrement } from '../redux/actions/counter.action';
 
 
 export default function Home() {
@@ -144,9 +145,7 @@ export default function Home() {
             </button>
             {counter}
             <button onClick={() => {
-                dispatch({
-                    type: "INC"
-                })
+                dispatch(counterIncrement)
             }}>+</button>
 
         </div >
