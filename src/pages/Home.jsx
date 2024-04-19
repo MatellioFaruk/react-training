@@ -8,7 +8,6 @@ import Header from '../layouts/Header';
 import { AuthenticationContext } from '../context/authentication.context';
 import { UserContext } from '../context/user.context';
 import { useDispatch, useSelector } from 'react-redux';
-import { counterIncrement } from '../redux/actions/counter.action';
 
 
 export default function Home() {
@@ -78,10 +77,8 @@ export default function Home() {
     // }
     return (
         <div>
-            <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-            <Link to='/home'>Home</Link>
-            <Link to='/privacy-policy'>Privacy policy</Link>
-            <Link to='/term'>Term</Link>
+
+
 
             Home
 
@@ -91,62 +88,7 @@ export default function Home() {
             <button onClick={handleTerms}>Terms</button>
             <br />
 
-            <Formik
-                initialValues={{
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    password: ""
-                }}
-                validationSchema={
-                    object({
-                        firstName: string().required(),
-                        lastName: string().required(),
-                        email: string().required().email(),
-                        password: string().required().min(1).max(10),
-                    })
 
-
-                }
-                onSubmit={(values, actions) => {
-                    console.log(values, actions)
-                }}
-            >
-                {({
-                    handleChange,
-                    values,
-                    errors,
-                    handleSubmit
-                }) => (<>
-
-                    {JSON.stringify(contextUser)}
-                    {JSON.stringify(values)}<br />
-                    {JSON.stringify(errors)}<br />
-                    <FormInput label={"First name"} name="firstName" type="text" value={values.firstName} error={errors.firstName} handleChange={handleChange} />
-                    <br />
-                    <FormInput label={"Last name"} name="lastName" type="text" value={values.lastName} error={errors.lastName} handleChange={handleChange} />
-                    <br />
-                    <FormInput label={"Email"} name="email" type="text" value={values.email} error={errors.email} handleChange={handleChange} />
-                    <br />
-                    <FormInput label={"Password"} name="password" type="password" value={values.password} error={errors.password} handleChange={handleChange} />
-                    <button onClick={() => {
-                        handleSubmit()
-                    }}>Submit</button>
-                </>)}
-            </Formik>
-
-
-            <button onClick={() => {
-                dispatch({
-                    type: "DEC"
-                })
-            }}>
-                -
-            </button>
-            {counter}
-            <button onClick={() => {
-                dispatch(counterIncrement)
-            }}>+</button>
 
         </div >
     )

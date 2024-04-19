@@ -43,16 +43,18 @@ function App() {
                       </PublicRoute>
                     } />
                     <Route path="privacy-policy" element={
-
-                      <PrivacyPolicy />
-
+                      <PublicRoute>
+                        <PrivacyPolicy />
+                      </PublicRoute>
                     } />
                     <Route path="terms-condition" element={
 
                       <Term />
 
                     } />
-                    <Route path="*" element={<NotFound />} />
+                    <Route path="*" element={
+                      <PublicRoute>   <NotFound /></PublicRoute>
+                    } />
                   </Route>
 
                 </Routes>
