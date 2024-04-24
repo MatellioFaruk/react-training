@@ -1,4 +1,24 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const FormInputContainer = styled.div`
+border:1px solid blue;
+.hello{
+    color:green;
+    .hi{
+        color:orange
+    }
+
+}
+
+`
+
+
+const Input = styled.input`
+border: 1px solid orange;
+color:${(props) => props.color};
+
+`
 
 export default function FormInput({
     label,
@@ -10,15 +30,26 @@ export default function FormInput({
     error
 }) {
     return (
-        <>
-            <label>
+        <FormInputContainer className='container'>
+
+            <div className='hello'>
+                Hello
+                <div className='hi'>Hiiii</div>
+            </div>
+            <label className="hello">
                 {label}
             </label>
             <br />
-            <input name={name} type={type} value={value} onBlur={handleBlur} onChange={handleChange} />
+            <Input
+                color="green"
+                name={name}
+                type={type}
+                value={value}
+                onBlur={handleBlur}
+                onChange={handleChange} />
             <small>
                 {error}
             </small>
-        </>
+        </FormInputContainer>
     )
 }
