@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Loading from "./components/Loading";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
-import AuthenticationProvider from "./context/authentication.context";
-import UserProvider from "./context/user.context";
+import AuthenticationProvider from "./contexts/authentication.context";
+import UserProvider from "./contexts/user.context";
 import { Provider } from "react-redux";
 import { store } from "./redux/redux";
+
 
 const Home = lazy(() => import("./pages/Home"))
 const Term = lazy(() => import("./pages/Term"))

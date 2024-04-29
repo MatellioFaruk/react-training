@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthenticationContext } from '../../context/authentication.context'
+import { AuthenticationContext } from '../../contexts/authentication.context'
 import { Formik } from 'formik'
 import FormInput from '../../components/FormInput'
 import { loginWithRedux } from '../../redux/slices/auth.slice'

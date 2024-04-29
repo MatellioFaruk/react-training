@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthenticationContext } from '../context/authentication.context'
+import { AuthenticationContext } from '../contexts/authentication.context'
 import Header from '../layouts/Header'
 import { useSelector } from 'react-redux'
 

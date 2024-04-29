@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { AuthenticationContext } from '../context/authentication.context'
+import { AuthenticationContext } from '../contexts/authentication.context'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 

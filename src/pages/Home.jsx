@@ -5,8 +5,8 @@ import { Formik } from 'formik'
 
 import { object, string, number, date, InferType } from 'yup';
 import Header from '../layouts/Header';
-import { AuthenticationContext } from '../context/authentication.context';
-import { UserContext } from '../context/user.context';
+import { AuthenticationContext } from '../contexts/authentication.context';
+import { UserContext } from '../contexts/user.context';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, getUsers } from '../services/users.service';
 
@@ -65,14 +65,9 @@ export default function Home() {
 
     const handleSubmit = () => {
         console.log(user)
-        // console.log(firstName, "firstName")
-        // console.log(lastName, "lastName")
-        // console.log(email, "email")
-        // console.log(password, "password")
-
-        //API call rest work
-
     }
+
+
 
     const add = (...values) => {
         debugger
@@ -98,6 +93,7 @@ export default function Home() {
 
     return (
         <div>
+            <img src={Check} />
 
             <h1>Users List</h1>
             {users.map(user => (
