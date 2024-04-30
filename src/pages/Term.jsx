@@ -1,12 +1,15 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-export default function Term() {
+
+function Term({ name, counter }) {
   const location = useLocation()
 
-  console.log(location, "location")
+  console.log("term page")
   return (
     <>
+      {name}
+      {counter}
       <Link to='/home'>Home</Link>
       <Link to='/privacy-policy'>Privacy policy</Link>
       <Link to='/term'>Term</Link>
@@ -15,3 +18,7 @@ export default function Term() {
 
   )
 }
+
+
+export const MemoTerm = React.memo(Term)
+

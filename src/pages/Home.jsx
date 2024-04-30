@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import FormInput from '../components/FormInput'
 import { Formik } from 'formik'
@@ -9,30 +9,38 @@ import { AuthenticationContext } from '../contexts/authentication.context';
 import { UserContext } from '../contexts/user.context';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, getUsers } from '../services/users.service';
+import { MemoTerm } from './Term';
+
+
 
 
 export default function Home() {
-
-    const navigate = useNavigate()
-    const params = useParams()
-    const counter = useSelector(state => state.counter.counter)
-    const dispatch = useDispatch()
-
-    const [user, setUser] = useState({
-
-    })
-
+    const [user, setUser] = useState({})
     const [users, setUsers] = useState([])
+    const [counter, setCounter] = useState(0)
+    // const [name, setName] = useState("")
 
-    const { isAuthenticated, setIsAuthenticated, logout } = useContext(AuthenticationContext)
+    const nameRef = useRef()
+    const calendarRef = useRef()
 
-    const { contextUser } = useContext(UserContext)
+    const handleSub = () => {
+        console.log(nameRef)
+    }
 
-    // const [firstName, setFirstName] = useState("")
-    // const [lastName, setLastName] = useState("")
-    // const [email, setEmail] = useState("")
-    // const [password, setPassword] = useState("")
+    // const calculate = useCallback((num) => {
+    //     console.log("Calculating")
+    //     for (let i = 0; i < 50000; i++) {
+    //         num = num + 1
+    //     }
 
+    //     return num
+    // }, [])
+
+
+
+
+
+    //  const value = useMemo(() => calculate(counter), [counter])
 
     useEffect(() => {
         getUsers().then(response => {
@@ -44,45 +52,6 @@ export default function Home() {
     }, [])
 
 
-    useEffect(() => {
-        console.log(user, "user")
-    }, [user])
-
-    const location = useLocation()
-    console.log(params, "params")
-    console.log(location.search.split("="), "location")
-
-    const handleTerms = () => {
-        //logic
-        navigate("/term", {
-            replace: true,
-            state: {
-                hello: "hello"
-            }
-        })
-    }
-
-
-    const handleSubmit = () => {
-        console.log(user)
-    }
-
-
-
-    const add = (...values) => {
-        debugger
-        console.log(values)
-    }
-
-
-
-
-    // const handleChange = (event) => {
-
-
-    //     setUser(prevState => { return { ...prevState, [event.target.name]: event.target.value } })
-
-    // }
 
     const handleClickOnUser = (userId) => {
         getUser(userId).then(response => {
@@ -93,7 +62,7 @@ export default function Home() {
 
     return (
         <div>
-            <img src={Check} />
+
 
             <h1>Users List</h1>
             {users.map(user => (
@@ -102,9 +71,22 @@ export default function Home() {
                 }}>{user.name}</p>
             ))}
 
-            {JSON.stringify(user)}
+            {/* use memo value:-{value} */}
+
+            <input ref={nameRef} />
 
 
+            <button onClick={() => {
+                nameRef.current.focus()
+            }} > Focus on input</button>
+            <button onClick={handleSub}>Submit</button>
+
+            <button onClick={() => setCounter(prev => prev - 1)}>-</button><br />
+            {/* counter value :- {counter} */}
+            <br />
+            <button onClick={() => setCounter(prev => prev + 1)}>+</button>
+            {/* 
+            <MemoTerm name={name} counter={counter} /> */}
         </div >
     )
 }
