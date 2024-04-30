@@ -18,7 +18,7 @@ export default function Home() {
     const [user, setUser] = useState({})
     const [users, setUsers] = useState([])
     const [counter, setCounter] = useState(0)
-    // const [name, setName] = useState("")
+    const [name, setName] = useState("")
 
     const nameRef = useRef()
     const calendarRef = useRef()
@@ -75,7 +75,6 @@ export default function Home() {
 
             <input ref={nameRef} />
 
-
             <button onClick={() => {
                 nameRef.current.focus()
             }} > Focus on input</button>
@@ -85,8 +84,8 @@ export default function Home() {
             {/* counter value :- {counter} */}
             <br />
             <button onClick={() => setCounter(prev => prev + 1)}>+</button>
-            {/* 
-            <MemoTerm name={name} counter={counter} /> */}
+
+            <MemoTerm name={name} counter={counter} />
         </div >
     )
 }
